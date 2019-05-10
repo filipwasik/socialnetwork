@@ -1,0 +1,14 @@
+-landing page
+-feed
+	-posts
+		-images
+		-likes
+		-comments
+-profiles
+	-is active
+	-posts
+	-pin board
+	-profile picture
+-contacts
+
+
