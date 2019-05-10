@@ -5,6 +5,8 @@
 
 		$firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
 		$lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+		$gender = mysqli_real_escape_string($conn, $_POST['gender']);
+		$birthdate = mysqli_real_escape_string($conn, $_POST['birthdate']);
 		$email = mysqli_real_escape_string($conn, $_POST['email']);
 		$username = mysqli_real_escape_string($conn, $_POST['username']);
 		$password = mysqli_real_escape_string($conn, $_POST['password']);
@@ -49,8 +51,8 @@
 							//Hashing the password
 							$hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 							//Insert the user into the database
-							$sql = "INSERT INTO user (firstname, lastname, email, username, password)
-							VALUES (?, ?, ?, ?, ?);";
+							$sql = "INSERT INTO user (firstname, lastname, email, username, password, birthdate, gender)
+							VALUES (?, ?, ?, ?, ?, ?, ?);";
 							//Create second prepared statement
 							$stmt2 = mysqli_stmt_init($conn);
 
@@ -60,7 +62,7 @@
 							    exit();
 							} else {
 								//Bind parameters to the placeholder
-								mysqli_stmt_bind_param($stmt2, "sssss", $firstname, $lastname, $email, $username, $hashedPwd);
+								mysqli_stmt_bind_param($stmt2, "sssss", $firstname, $lastname, $email, $username, $hashedPwd, $birthdate, $gender);
 
 								//Run query in database
 								mysqli_stmt_execute($stmt2);
