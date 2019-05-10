@@ -1,0 +1,99 @@
+body {
+	font-family:'Roboto',sans-serif;
+}
+
+.container {
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+}
+.container .info {
+	font-family:'Roboto',sans-serif;
+	line-height:17px;
+	text-transform:uppercase;
+  color: #1919ff;
+	margin-bottom:3em;
+}
+.container .info h1 {
+	font-size:50px;
+	letter-spacing:5px;
+	padding:0;
+	margin:0;
+	color: #1919ff;
+}
+.container .info h2 {
+  margin-top: 1.5em;
+  font-size: 18.5px;
+	line-height:13px;
+	letter-spacing:3px;
+  text-align: left;
+	color:#999
+}
+
+
+.container .info h2 a {
+	text-decoration:none;
+	color:inherit;
+}
+
+
+
+
+
+
+
+.ph-button {
+
+    border-style: solid;
+    border-width: 0px 0px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    color: #FFFFFF;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-style: normal;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: all 200ms ease-in-out 0s;
+    white-space: nowrap;
+    font-family:'Roboto',sans-serif;
+    font-weight: 700;
+    padding: 19px 39px 18px;
+    font-size: 18px;
+    float: left;
+    margin-right: 1em;
+
+
+}
+
+
+
+
+/*Log In Button
+==========================*/
+.ph-btn-grey {
+
+     background-color: #C6CCD2;
+     border-color: #AAB3BB;
+}
+.ph-btn-grey:hover, .ph-btn-grey:focus, .ph-btn-grey:active {
+    background-color: #B8BFC7;
+    border-color: #AAB3BB;
+}
+
+/*Sign Up Button
+==========================*/
+.ph-btn-red {
+
+    background-color: #1919ff !important;
+    border-color: #1414cc !important;
+
+}
+.ph-btn-red:hover, .ph-btn-red:focus, .ph-btn-red:active {
+    background: none repeat scroll 0 0 #1616e5 !important;
+    border-color: #1616e5 !important;
+}
