@@ -1,58 +1,52 @@
 <?php
-
-	session_start();
-
 	if (isset($_POST['submit'])) {
 
-		include_once 'dbh.inc.php';
-		
-		$uid = mysqli_real_escape_string($conn, $_POST['uid']);
-		$pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
+		require 'dbh.inc.php';
 
-		if (empty($uid) || empty($pwd)) {
+		$username_mail = $_POST['username_mail'];
+		$password = $_POST['password'];
+
+		if (empty($username_mail) || empty($password)) {
 			header("Location: ../index.php?login=empty");
 			exit();
 		}
 		else {
-			
-			$sql = "SELECT * FROM users WHERE user_uid=?";
-			
+
+			$sql = "SELECT * FROM user WHERE username=? OR email=?";
+
 			$stmt = mysqli_stmt_init($conn);
-			
+
 			if(!mysqli_stmt_prepare($stmt, $sql)) {
-			    header("Location: ../index.php?login=error");
+			    header("Location: ../index.php?login=sqlerror");
 			    exit();
 			}
-			
-			else {
-				
-				mysqli_stmt_bind_param($stmt, "s", $uid);
-				mysqli_stmt_execute($stmt);
 
+			else {
+
+				mysqli_stmt_bind_param($stmt, "ss", $username_mail, $username_mail);
+				mysqli_stmt_execute($stmt);
 	      $result = mysqli_stmt_get_result($stmt);
 
-				
 				if ($row = mysqli_fetch_assoc($result)) {
-					
-					$hashedPwdCheck = password_verify($pwd, $row['user_pwd']);
-					
+
+					$hashedPwdCheck = password_verify($password, $row['password']);
+
 					if ($hashedPwdCheck == false) {
-						header("Location: ../index.php?login=error");
+						header("Location: ../index.php?login=wrongpassword");
 						exit();
 					}
-				
+
 					elseif ($hashedPwdCheck == true) {
-						
-						$_SESSION['u_id'] = $row['user_id'];
-						$_SESSION['u_first'] = $row['user_first'];
-						$_SESSION['u_last'] = $row['user_last'];
-						$_SESSION['u_email'] = $row['user_email'];
-						$_SESSION['u_uid'] = $row['user_uid'];
+
+						session_start();
+
+						$_SESSION['username'] = $row['username'];
+						$_SESSION['email'] = $row['email'];
 						header("Location: ../index.php?login=success");
 						exit();
 					}
 	      } else {
-	        header("Location: ../index.php?login=error");
+	        header("Location: ../index.php?login=usernotfound");
 				exit();
 	      }
 			}
