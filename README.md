@@ -1,2 +1,2 @@
 # socialnetwork
-social network project
+approved by Thomas
