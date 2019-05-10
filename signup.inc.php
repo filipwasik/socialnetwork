@@ -2,19 +2,19 @@
 	if (isset($_POST['submit'])) {
 
 		include_once 'dbh.inc.php';
-		
-		$first = mysqli_real_escape_string($conn, $_POST['first']);
-		$last = mysqli_real_escape_string($conn, $_POST['last']);
-		$email = mysqli_real_escape_string($conn, $_POST['email']);
-		$uid = mysqli_real_escape_string($conn, $_POST['uid']);
-		$pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
 
-		if (empty($first) || empty($last) || empty($email) || empty($uid) || empty($pwd)) {
+		$firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+		$lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+		$email = mysqli_real_escape_string($conn, $_POST['email']);
+		$username = mysqli_real_escape_string($conn, $_POST['username']);
+		$password = mysqli_real_escape_string($conn, $_POST['password']);
+
+		if (empty($firstname) || empty($lastname) || empty($email) || empty($username) || empty($password)) {
 			header("Location: ../signup.php?signup=empty");
 			exit();
 		} else {
 			//Check if input characters are valid
-			if (!preg_match("/^[a-zA-Z]*$/", $first) || !preg_match("/^[a-zA-Z]*$/", $last)) {
+			if (!preg_match("/^[a-zA-Z]*$/", $firstname) || !preg_match("/^[a-zA-Z]*$/", $lastname)) {
 				header("Location: ../signup.php?signup=invalid");
 				exit();
 			} else {
@@ -24,7 +24,7 @@
 					exit();
 				} else {
 					//Check if username exists
-					$sql = "SELECT * FROM users WHERE user_uid=?";
+					$sql = "SELECT * FROM user WHERE username=?";
 					//Create a prepared statement
 					$stmt = mysqli_stmt_init($conn);
 					//Check if prepared statement fails
@@ -34,7 +34,7 @@
 					} else {
 						//Bind parameters to the placeholder
 						//The "s" means we are defining the placeholder as a string
-						mysqli_stmt_bind_param($stmt, "s", $uid);
+						mysqli_stmt_bind_param($stmt, "s", $username);
 
 						//Run query in database
 						mysqli_stmt_execute($stmt);
@@ -47,9 +47,9 @@
 							exit();
 						} else {
 							//Hashing the password
-							$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+							$hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 							//Insert the user into the database
-							$sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd)
+							$sql = "INSERT INTO user (firstname, lastname, email, username, password)
 							VALUES (?, ?, ?, ?, ?);";
 							//Create second prepared statement
 							$stmt2 = mysqli_stmt_init($conn);
@@ -60,7 +60,7 @@
 							    exit();
 							} else {
 								//Bind parameters to the placeholder
-								mysqli_stmt_bind_param($stmt2, "sssss", $first, $last, $email, $uid, $hashedPwd);
+								mysqli_stmt_bind_param($stmt2, "sssss", $firstname, $lastname, $email, $username, $hashedPwd);
 
 								//Run query in database
 								mysqli_stmt_execute($stmt2);
