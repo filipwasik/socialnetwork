@@ -52,7 +52,7 @@
 							$hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 							//Insert the user into the database
 							$sql = "INSERT INTO user (firstname, lastname, email, username, password, birthdate, gender)
-							VALUES (?, ?, ?, ?, ?, ?, ?);";
+							VALUES (?, ?, ?, ?, ?, ?, ?);"; // ? = Anzahl der Variablen
 							//Create second prepared statement
 							$stmt2 = mysqli_stmt_init($conn);
 
@@ -62,7 +62,8 @@
 							    exit();
 							} else {
 								//Bind parameters to the placeholder
-								mysqli_stmt_bind_param($stmt2, "sssss", $firstname, $lastname, $email, $username, $hashedPwd, $birthdate, $gender);
+								// "s = Anzahl der Variablen"
+								mysqli_stmt_bind_param($stmt2, "sssssss", $firstname, $lastname, $email, $username, $hashedPwd, $birthdate, $gender);
 
 								//Run query in database
 								mysqli_stmt_execute($stmt2);
