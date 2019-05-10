@@ -1,4 +1,4 @@
--landing page
+-landing page [DONE]
 -feed
 	-posts
 		-images
@@ -10,5 +10,5 @@
 	-pin board
 	-profile picture
 -contacts
-
+-password reset email
 
