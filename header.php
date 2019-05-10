@@ -22,15 +22,16 @@
 			<div class="nav-login">
 				<?php
 
-					if (isset($_SESSION['u_id'])) {
-						echo '<form action="includes/logout.inc.php" method="POST">
+					if (isset($_SESSION['username'])) {
+						echo '<a href="profile.php">Profile</a><form action="includes/logout.inc.php" method="POST">
 							<button type="submit" name="submit">Logout</button>
+
 						</form>';
 					}
 
 					else {
 						echo '<form action="includes/login.inc.php" method="POST">
-							<input type="text" name="username" placeholder="Username">
+							<input type="text" name="username_mail" placeholder="Username/E-Mail">
 							<input type="password" name="password" placeholder="Password">
 							<button type="submit" name="submit">Login</button>
 						</form>
