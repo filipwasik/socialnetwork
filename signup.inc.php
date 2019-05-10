@@ -1,15 +1,15 @@
 <?php
 	if (isset($_POST['submit'])) {
 
-		include_once 'dbh.inc.php';
+		require 'dbh.inc.php';
 
-		$firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
-		$lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
-		$gender = mysqli_real_escape_string($conn, $_POST['gender']);
-		$birthdate = mysqli_real_escape_string($conn, $_POST['birthdate']);
-		$email = mysqli_real_escape_string($conn, $_POST['email']);
-		$username = mysqli_real_escape_string($conn, $_POST['username']);
-		$password = mysqli_real_escape_string($conn, $_POST['password']);
+		$firstname = $_POST['firstname'];
+		$lastname = $_POST['lastname'];
+		$gender = $_POST['gender'];
+		$birthdate = $_POST['birthdate'];
+		$email = $_POST['email'];
+		$username = $_POST['username'];
+		$password =  $_POST['password'];
 
 		if (empty($firstname) || empty($lastname) || empty($email) || empty($username) || empty($password)) {
 			header("Location: ../signup.php?signup=empty");
@@ -67,7 +67,8 @@
 
 								//Run query in database
 								mysqli_stmt_execute($stmt2);
-								header("Location: ../signup.php?signup=success");
+							//	header("Location: ../signup.php?signup=success");
+									header("Location: ../index.php?signup=success");
 								exit();
 							}
 						}
