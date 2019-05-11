@@ -7,9 +7,9 @@
 		<h1>Sign up</h1>
 		<form class="signup-form" action="includes/signup.inc.php" method="POST">
 			<input type="text" name="firstname" placeholder="Firstname">
-			<input type="text" name="lastname" placeholder="Lastname">
-			Male <input type="radio" name="gender" value="male">
-  		Female <input type="radio" class="radio"  name="gender" value="female">
+			<input type="text" name="lastname" placeholder="Lastname"><br>
+			 Female<input type="radio" name="gender" value="male"><br>
+  		 Male<input type="radio" class="radio"  name="gender" value="female">
 			<input type="date" name="birthdate" placeholder="Birthdate">
 			<input type="text" name="email" placeholder="E-Mail">
 			<input type="text" name="username" placeholder="Username">
