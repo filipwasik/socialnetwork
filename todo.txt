@@ -11,4 +11,4 @@
 	-profile picture
 -contacts
 -password reset email
-
+-change password,email,picture
