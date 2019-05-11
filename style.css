@@ -166,6 +166,7 @@ header .nav-login form input {
     font-size: 14px;
     color: #111;
     line-height: 30px;
+    font-weight: bold;
 }
 
 header .nav-login form button {
@@ -174,12 +175,27 @@ header .nav-login form button {
     height: 30px;
     margin-right: 10px;
     border: none;
-    background-color: #f3f3f3;
+    background-color: ##f3f3f3;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color: #111;
     cursor: pointer;
+    font-weight: bold;
 }
+header .nav-login form .blue{
+  float: left;
+  width: 60px;
+  height: 30px;
+  margin-right: 10px;
+  border: none;
+  background-color: #1919ff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 
 header .nav-login form button:hover {
     background-color: #ccc;
@@ -217,7 +233,7 @@ header .nav-login a {
   text-align: center;
 }
 .main-wrapper h1 {
-    font-size: 2em;
+    font-size: 2.5em;
 
 }
 
@@ -230,7 +246,7 @@ header .nav-login a {
 }
 
 .signup-form input {
-    width: 90%;
+    width: 50%;
     height: 40px;
     padding: 4px 5%;
     border: none;
