@@ -2,16 +2,22 @@
 	require 'header.php';
 ?>
 
+
 <section class="main-container">
 	<div class="main-wrapper">
-		<?php
+<?php
 
-			if (isset($_SESSION['username'])){ ?>
-    <center><h1>Logged in</h1><br></center>
-</script>
-		<?php
-}
-	else echo "<h1> Logged Out </h1> "; ?>
+	if (isset($_SESSION['username'])){
+  	echo"<center><h1>Logged in</h1><br></center>";
+		echo"<a href='profile.php'>Profile</a>";
+	}
+
+	else echo "<h1> Logged Out </h1> ";
+
+
+
+
+?>
 	</div>
 </section>
 
