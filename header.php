@@ -23,20 +23,36 @@
 				<?php
 
 					if (isset($_SESSION['username'])) {
-						echo '<a href="profile.php">Profile</a><form action="includes/logout.inc.php" method="POST">
-							<button type="submit" name="submit">Logout</button>
+						echo '
+						<a href="friends.php">Friends</a>
+						<form action="search.php" method="POST">
+						<input type="text" placeholder="Find people">
 
-						</form>';
+						<button type=submit name="search">Search</button>
+						</form>
+
+						<a href="profile.php">Profile</a>
+						<form action="includes/logout.inc.php" method="POST">
+						<button type="submit" name="submit">Logout</button>
+
+						</form>
+
+
+						';
 					}
 
 					else {
 						echo '<form action="includes/login.inc.php" method="POST">
-							<input type="text" name="username_mail" placeholder="Username/E-Mail">
-							<input type="password" name="password" placeholder="Password">
-							<button type="submit" name="submit">Login</button>
+						<input type="text" name="username_mail" placeholder="Username/E-Mail">
+						<input type="password" name="password" placeholder="Password">
+						<button type="submit" name="submit">Login</button>
 						</form>
-						<a href="signup.php">Sign up</a>';
-					}
+
+						<form action="signup.php" method="POST">
+						<button type="submit" name="submit" class="blue">Join us</button>
+
+						</form>';
+						}
 				?>
 			</div>
 		</div>
