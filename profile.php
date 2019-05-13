@@ -31,3 +31,17 @@ else header("Location: index.php?profile=logintoview");
 <?php
 	require 'footer.php';
 ?>
+
+
+<!--Image Upload
+-------------------
+<form action="4-upload.php" method="post" enctype="multipart/form-data">
+	<input type="file" name="upFile" id="upFile" accept=".png,.gif,.jpg,.webp" required>
+	<input type="submit" name="submit" value="Upload Image">
+</form>
+-------------------
+
+Show IMAGE
+----------------------------------------------
+<img src="6-fetch.php?f=rec-monitors.jpg">
+-------------------------------------------
