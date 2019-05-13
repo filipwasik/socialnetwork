@@ -10,64 +10,61 @@
 		$email = $_POST['email'];
 		$username = $_POST['username'];
 		$password =  $_POST['password'];
-
+		// Input  Fehlerüberprüfung
+			// leere Eingabe
 		if (empty($firstname) || empty($lastname) || empty($email) || empty($username) || empty($password)) {
 			header("Location: ../signup.php?signup=empty");
 			exit();
 		} else {
-			//Check if input characters are valid
+			//Zeichen Überprüfung
 			if (!preg_match("/^[a-zA-Z]*$/", $firstname) || !preg_match("/^[a-zA-Z]*$/", $lastname)) {
 				header("Location: ../signup.php?signup=invalid");
 				exit();
 			} else {
-				//Check if email is valid
+				//E-Mail Überprüfung
 				if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 					header("Location: ../signup.php?signup=email");
 					exit();
 				} else {
-					//Check if username exists
+					//Username Überprüfung
 					$sql = "SELECT * FROM user WHERE username=?";
-					//Create a prepared statement
+					//prepared statement
 					$stmt = mysqli_stmt_init($conn);
-					//Check if prepared statement fails
+					//prepared statement TEST
 					if(!mysqli_stmt_prepare($stmt, $sql)) {
 					    header("Location: ../index.php?login=error");
 					    exit();
 					} else {
-						//Bind parameters to the placeholder
-						//The "s" means we are defining the placeholder as a string
+						//"s" = placeholder
 						mysqli_stmt_bind_param($stmt, "s", $username);
 
-						//Run query in database
+						//Query ausführen
 						mysqli_stmt_execute($stmt);
 
-						//Check if user exists
+						//Username Überprüfung
 						mysqli_stmt_store_result($stmt);
 						$resultCheck = mysqli_stmt_num_rows($stmt);
 						if ($resultCheck > 0) {
 							header("Location: ../signup.php?signup=usertaken");
 							exit();
 						} else {
-							//Hashing the password
+							//Password Hashing
 							$hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-							//Insert the user into the database
+							//in Datenbank einfügen
 							$sql = "INSERT INTO user (firstname, lastname, email, username, password, birthdate, gender)
 							VALUES (?, ?, ?, ?, ?, ?, ?);"; // ? = Anzahl der Variablen
-							//Create second prepared statement
 							$stmt2 = mysqli_stmt_init($conn);
 
-							//Check if prepared statement fails
+							//Fehlerüberprüfung Datenbank
 							if(!mysqli_stmt_prepare($stmt2, $sql)) {
 							    header("Location: ../index.php?login=error");
 							    exit();
 							} else {
-								//Bind parameters to the placeholder
-								// "s = Anzahl der Variablen"
+								// "s = Anzahl der übergebenden Variablen"
 								mysqli_stmt_bind_param($stmt2, "sssssss", $firstname, $lastname, $email, $username, $hashedPwd, $birthdate, $gender);
 
-								//Run query in database
+								//Query ausführen
 								mysqli_stmt_execute($stmt2);
-							//	header("Location: ../signup.php?signup=success");
 									header("Location: ../index.php?signup=success");
 								exit();
 							}
