@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Erstellungszeit: 13. Mai 2019 um 09:12
+-- Erstellungszeit: 13. Mai 2019 um 21:43
 -- Server-Version: 10.1.38-MariaDB
 -- PHP-Version: 7.1.28
 
@@ -25,6 +25,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `comment`
+--
+
+CREATE TABLE `comment` (
+  `commentID` int(11) NOT NULL,
+  `postID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `content` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `comment`
+--
+
+INSERT INTO `comment` (`commentID`, `postID`, `userID`, `content`) VALUES
+(0, 1, 15, 'guter Beitrag');
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `commented`
 --
 
@@ -32,6 +52,13 @@ CREATE TABLE `commented` (
   `postID` int(11) NOT NULL,
   `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `commented`
+--
+
+INSERT INTO `commented` (`postID`, `userID`) VALUES
+(1, 15);
 
 -- --------------------------------------------------------
 
@@ -55,6 +82,13 @@ CREATE TABLE `friends` (
   `userID2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `friends`
+--
+
+INSERT INTO `friends` (`userID1`, `userID2`) VALUES
+(12, 15);
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +99,36 @@ CREATE TABLE `liked` (
   `postID` int(11) NOT NULL,
   `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `liked`
+--
+
+INSERT INTO `liked` (`postID`, `userID`) VALUES
+(1, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `post`
+--
+
+CREATE TABLE `post` (
+  `postID` int(4) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `content` varchar(150) NOT NULL,
+  `likes` int(11) NOT NULL,
+  `dislikes` int(11) NOT NULL,
+  `likeratio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `post`
+--
+
+INSERT INTO `post` (`postID`, `userID`, `date`, `content`, `likes`, `dislikes`, `likeratio`) VALUES
+(1, 12, '2019-05-01 04:23:00', 'oof', 5, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -77,20 +141,12 @@ CREATE TABLE `posted` (
   `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Tabellenstruktur für Tabelle `posts`
+-- Daten für Tabelle `posted`
 --
 
-CREATE TABLE `posts` (
-  `postID` int(11) NOT NULL,
-  `date` datetime NOT NULL,
-  `content` int(11) NOT NULL,
-  `likes` int(11) NOT NULL,
-  `dislikes` int(11) NOT NULL,
-  `likeratio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `posted` (`postID`, `userID`) VALUES
+(1, 12);
 
 -- --------------------------------------------------------
 
@@ -104,6 +160,13 @@ CREATE TABLE `profile` (
   `pic` int(11) NOT NULL,
   `userID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `profile`
+--
+
+INSERT INTO `profile` (`status`, `bio`, `pic`, `userID`) VALUES
+(0, 'hi', 0, 12);
 
 -- --------------------------------------------------------
 
@@ -136,10 +199,22 @@ INSERT INTO `user` (`userID`, `username`, `firstname`, `lastname`, `birthdate`, 
 --
 
 --
+-- Indizes für die Tabelle `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`commentID`);
+
+--
 -- Indizes für die Tabelle `friends`
 --
 ALTER TABLE `friends`
   ADD PRIMARY KEY (`userID2`);
+
+--
+-- Indizes für die Tabelle `post`
+--
+ALTER TABLE `post`
+  ADD PRIMARY KEY (`postID`);
 
 --
 -- Indizes für die Tabelle `posted`
@@ -162,6 +237,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT für exportierte Tabellen
 --
+
+--
+-- AUTO_INCREMENT für Tabelle `post`
+--
+ALTER TABLE `post`
+  MODIFY `postID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `user`
