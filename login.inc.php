@@ -5,7 +5,8 @@
 
 		$username_mail = $_POST['username_mail'];
 		$password = $_POST['password'];
-
+		//Input Fehlerüberprüfung
+			//leere Eingabe
 		if (empty($username_mail) || empty($password)) {
 			header("Location: ../index.php?login=empty");
 			exit();
@@ -28,7 +29,7 @@
 	      $result = mysqli_stmt_get_result($stmt);
 
 				if ($row = mysqli_fetch_assoc($result)) {
-
+					//Password Hashing
 					$hashedPwdCheck = password_verify($password, $row['password']);
 
 					if ($hashedPwdCheck == false) {
