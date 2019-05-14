@@ -3,9 +3,9 @@ Abfragen
 -------------------------------------------
 Alle Posts eines Users (ohne comments)
 
-SELECT user.firstname,user.lastname,user.username,profile.pic,post.content,post.date,post.likeratio  FROM post,user,profile,posted
-WHERE post.postID = posted.postID
-AND user.userID = post.userID
+SELECT profile.pic,user.firstname,user.lastname,user.username,post.content,post.date,post.likeratio 
+FROM post,user,profile
+WHERE user.userID = post.userID
 AND profile.userID = user.userID
 
 ----------------------------------------------
