@@ -9,3 +9,11 @@ WHERE user.userID = post.userID
 AND profile.userID = user.userID
 
 ----------------------------------------------
+
+Feed Post ohne comments
+
+SELECT profile.pic,user.firstname,user.lastname,user.username,post.content,post.date,post.likeratio 
+FROM post,user,profile,friends
+WHERE user.userID = "12"
+AND friends.userID2 = post.userID
+AND friends.userID1 = user.userID
